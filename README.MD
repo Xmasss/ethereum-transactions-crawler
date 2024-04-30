@@ -9,6 +9,8 @@ wallet address starting with block B.
 * application supports paging, sorting and selecting.
 * current version doesn't support investigating different
   addresses. Choosen address is hardcoded - exception handling is not supported.
+* lack of appropriate logging
+* lack of JUnit tests
 
 #### Demo:
 ![index page](index.png)
@@ -38,7 +40,7 @@ docker run -p 8080:8080 ethereum-transactions-crawler-1.0.1:latest
 ```
 
 ### Run application
-Navigate to the `localhost:8080` in your browser
+Navigate to the `localhost:8080` in your browser:
 ```
 http://localhost:8080/
 ```
