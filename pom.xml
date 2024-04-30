@@ -1,0 +1,404 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.xlab-dynamics</groupId>
+	<artifactId>ethereum-transactions-crawler</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>ethereum-transactions-crawler</name>
+	<description>Ethereum transactions crawler task</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.5</version>
+		<relativePath/>
+	</parent>
+
+	<properties>
+		<java.version>17</java.version>
+		<spring-boot.run.jvmArguments></spring-boot.run.jvmArguments>
+		<zkspringboot.version>3.0.0</zkspringboot.version>
+		<zk.version>9.6.0.1-jakarta-Eval</zk.version>
+		<zkcharts.version>8.0.4.1-Eval</zkcharts.version>
+		<zkcalendar.version>3.0.1</zkcalendar.version>
+		<pivottable.version>2.5.2-Eval</pivottable.version>
+		<gmapsz.version>3.2.0</gmapsz.version>
+		<org.zkoss.zkspringboot>3.2.1</org.zkoss.zkspringboot>
+		<net.sf.jasperreports>6.17.0</net.sf.jasperreports>
+		<com.lowagie>4.2.2</com.lowagie>
+		<org.apache.poi>3.17</org.apache.poi>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>ZK CE</id>
+			<name>ZK CE Repository</name>
+			<url>https://mavensync.zkoss.org/maven2</url>
+		</repository>
+		<repository>
+			<id>ZK EVAL</id>
+			<name>ZK Evaluation Repository</name>
+			<url>https://mavensync.zkoss.org/eval</url>
+		</repository>
+		<repository>
+			<id>zkspringboot-starter</id>
+			<name>zkspringboot-starter</name>
+			<url>https://mvnrepository.com/artifact/org.zkoss.zkspringboot/zkspringboot-starter</url>
+		</repository>
+		<repository>
+			<id>spring-boot-starter-web</id>
+			<name>spring-boot-starter-web</name>
+			<url>https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web</url>
+		</repository>
+		<repository>
+			<id>junit-jupiter-api</id>
+			<name>junit-jupiter-api</name>
+			<url>https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api</url>
+		</repository>
+		<repository>
+			<id>servlet-api</id>
+			<name>servlet-api</name>
+			<url>https://mvnrepository.com/artifact/javax.servlet/servlet-api</url>
+		</repository>
+		<repository>
+			<id>jakarta.servlet-api</id>
+			<name>jakarta.servlet-api</name>
+			<url>https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api</url>
+		</repository>
+		<repository>
+			<id>spring-boot-starter-parent</id>
+			<name>spring-boot-starter-parent</name>
+			<url>https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.17.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>8.0.1.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>3.1.0-M2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<version>3.2.5</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.0.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<version>3.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>2.0.13</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.1.0-M2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zk</artifactId>
+			<version>${zk.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-jdk14</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkbind</artifactId>
+			<version>${zk.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-jdk14</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zul</artifactId>
+			<version>${zk.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-jdk14</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkplus</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zk-bom</artifactId>
+			<version>${zk.version}</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zuti</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${net.sf.jasperreports}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.lowagie</groupId>
+					<artifactId>itext</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>${com.lowagie}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${org.apache.poi}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.chart</groupId>
+			<artifactId>zkcharts</artifactId>
+			<version>${zkcharts.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zuljsp</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zkforge</groupId>
+			<artifactId>gmapsz</artifactId>
+			<version>${gmapsz.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zkforge</groupId>
+			<artifactId>ckez</artifactId>
+			<version>4.14.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.calendar</groupId>
+			<artifactId>calendar</artifactId>
+			<version>${zkcalendar.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.pivot</groupId>
+			<artifactId>pivottable</artifactId>
+			<version>${pivottable.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.theme</groupId>
+			<artifactId>iceblue_c</artifactId>
+			<version>10.0.0-Eval</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.theme</groupId>
+			<artifactId>breeze</artifactId>
+			<version>10.0.0-Eval</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.theme</groupId>
+			<artifactId>sapphire</artifactId>
+			<version>10.0.0-Eval</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.theme</groupId>
+			<artifactId>silvertail</artifactId>
+			<version>10.0.0-Eval</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geronimo.ext.tomcat</groupId>
+			<artifactId>juli</artifactId>
+			<version>7.0.23.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>rome</groupId>
+			<artifactId>rome</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jhlabs</groupId>
+			<artifactId>filters</artifactId>
+			<version>2.0.235</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zkoss.zkspringboot</groupId>
+			<artifactId>zkspringboot-starter</artifactId>
+			<type>pom</type>
+			<version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.32</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>3.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<version>3.2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>3.2.5</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>ethereum-transactions-crawler-build</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>add-dgs-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<executable>true</executable>
+					<addResources>true</addResources>
+					<image>
+						<name>ethereum-transactions-crawler-1.0.1</name>
+					</image>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

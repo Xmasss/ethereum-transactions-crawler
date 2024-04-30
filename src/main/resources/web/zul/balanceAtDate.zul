@@ -1,0 +1,6 @@
+<zk>
+    <window title="Balance at date" viewModel="@id('balanceDataVm') @init(pageModel)">
+        <label  value="BALANCE AT DATE"/>
+        <label value="@load(subVm.data)"/>
+    </window>
+</zk>

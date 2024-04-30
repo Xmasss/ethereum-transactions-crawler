@@ -1,0 +1,17 @@
+<window id="win" title="Transaction List" border="normal"
+        apply="com.xlabdynamics.etc.controller.ListboxController">
+    <listbox model="${win$composer.walletDaoListModel}" checkmark="false" mold="paging" pageSize="4">
+        <listhead>
+            <listheader label="From address" align="center" sort="auto(fromAddress)" />
+            <listheader label="To address" align="center" sort="auto(toAddress)" />
+            <listheader label="Balance" align="center" sort="auto(balance)" />
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="${each.fromAddress}" />
+                <listcell label="${each.toAddress}" />
+                <listcell label="${each.balance}" />
+            </listitem>
+        </template>
+    </listbox>
+</window>

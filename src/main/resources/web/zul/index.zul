@@ -1,0 +1,67 @@
+<zk>
+    <style src="~./css/style.css" />
+    <div apply="org.zkoss.bind.BindComposer"
+         viewModel="@id('vm') @init('com.xlabdynamics.etc.viewmodel.IndexViewModel')"
+         validationMessages="@id('vmsgs')"
+         form="@id('fx') @validator('com.xlabdynamics.etc.validator.IndexValidator')">
+        <include id="include1" src="@load(vm.currentUrl)" data="@load(vm.data)"/>
+
+        <style dynamic="true">
+            .myGridWithNoBorder tr.z-row td.z-row-inner { border-right: 3px #CCC; }
+
+            .GridLayoutNoBorder tr.z-row td.z-row-inner, tr.z-row .z-cell,div.z-grid
+            {
+            border: none;
+            border-collapse: collapse;
+            overflow: hidden;
+            zoom: 1;
+            background: white;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            }
+
+            .myButton.z-button .z-button-cm{
+            width : 100px;
+            text-align:left;
+            }
+
+        </style>
+        <grid sclass="GridLayoutNoBorder">
+            <columns>
+                <column label="" width="200px" height="50"/>
+                <column label="Ethereum Transaction Crawler" style="font-size:1.5em;"/>
+            </columns>
+            <rows>
+                <row>
+                    Wallet address:
+                    <textbox id="toAddressIndex" constraint="no empty" value="@bind(vm.toAddress)"
+                             width="420px" maxlength="42" tabindex="1" />
+                </row>
+                <row>
+                    Starting block:
+                    <textbox id="startingBlockIndex" constraint="no empty" value="@bind(vm.startingBlock)"
+                             width="420px" maxlength="8" tabindex="2" />
+                </row>
+
+                <row>
+                    <cell style="text-align:left">
+                        <vlayout>
+                            <label visible="@load(empty vmsgs)"
+                                   value="@load(empty vmsgs ? 'Form successfully submitted!' : '', before='viewTransaction')" />
+                            <button label="View transactions"
+                                    onClick="@command('navigate', page='page1')"
+                                    sclass="myButton"/>
+                        </vlayout>
+                    </cell>
+                </row>
+                <row>
+                    <vlayout></vlayout>
+                </row>
+
+            </rows>
+        </grid>
+        <include pageModel="@load(vm.currentPage)" src="@load(vm.currentPage.uri)"/>
+    </div>
+</zk>
