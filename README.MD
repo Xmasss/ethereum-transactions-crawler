@@ -38,7 +38,7 @@ docker run -p 8080:8080 ethereum-transactions-crawler-1.0.1:latest
 ```
 
 ### Run application
-Navigate to the `localhost:5000` in your browser
+Navigate to the `localhost:8080` in your browser
 ```
 http://localhost:8080/
 ```
